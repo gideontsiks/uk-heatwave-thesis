@@ -1,0 +1,23 @@
+# Built documents and exports (regenerate them from the scripts)
+*.docx
+*.pdf
+*.zip
+*.png
+
+# Generated folders
+thesis_figures/
+looker/
+__pycache__/
+.venv/
+node_modules/
+
+# Private working and audit notes: these must stay off GitHub
+audit/
+notes/
+*_checkpoint.md
+handover*.md
+data_audit*.md
+
+# Mac and log clutter
+.DS_Store
+*.log
