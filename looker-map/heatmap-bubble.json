@@ -15,6 +15,9 @@
       ]
     }
   ],
+  "interactions": [
+    { "id": "regionFilter", "supportedActions": ["FILTER"] }
+  ],
   "style": [
     {
       "id": "titleGroup",

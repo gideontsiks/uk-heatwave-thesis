@@ -38,6 +38,7 @@ var REGIONS = {"type":"FeatureCollection","features":[{"type":"Feature","propert
 
 (function () {
   var mapEl, titleEl, map, layer, labelLayer;
+  var selectedRegion = null;
 
   function ensure() {
     if (!mapEl) {
@@ -97,6 +98,17 @@ var REGIONS = {"type":"FeatureCollection","features":[{"type":"Feature","propert
     titleEl.textContent = title || '';
     titleEl.style.display = title ? 'block' : 'none';
 
+    // Field id for the Region dimension, used when sending a filter.
+    var regionFieldId = (data.fields && data.fields.region && data.fields.region[0] && data.fields.region[0].id) || null;
+    // Keep selection in sync with any filter already applied.
+    if (data.interactions && data.interactions.regionFilter &&
+        data.interactions.regionFilter.value && data.interactions.regionFilter.value.data &&
+        data.interactions.regionFilter.value.data.length) {
+      selectedRegion = ('' + data.interactions.regionFilter.value.data[0][0]);
+    } else {
+      selectedRegion = null;
+    }
+
     if (!map) {
       map = L.map(mapEl, {
         zoomControl: false, attributionControl: false, dragging: false,
@@ -113,15 +125,29 @@ var REGIONS = {"type":"FeatureCollection","features":[{"type":"Feature","propert
         var name = feat.properties.region;
         var has = byRegion.hasOwnProperty(name);
         var t = has ? (byRegion[name] - vmin) / (vmax - vmin) : 0;
+        var isSel = (selectedRegion === name);
+        var dim = (selectedRegion && !isSel);
         return {
           fillColor: has ? ramp(t, c0, c1, c2) : '#EAF1F2',
-          fillOpacity: opacity, color: '#33494D', weight: 1
+          fillOpacity: dim ? opacity * 0.35 : opacity,
+          color: isSel ? '#14252A' : '#33494D',
+          weight: isSel ? 3 : 1
         };
       },
       onEachFeature: function (feat, lyr) {
         var name = feat.properties.region;
         var v = byRegion[name];
         lyr.bindPopup('<b>' + name + '</b><br>' + (v != null ? fmt(v, dec) : 'no data'));
+        lyr.on('click', function () {
+          if (!regionFieldId) return;
+          if (selectedRegion === name) {
+            dscc.clearInteraction('regionFilter', dscc.InteractionType.FILTER);
+          } else {
+            dscc.sendInteraction('regionFilter', dscc.InteractionType.FILTER, {
+              concepts: [regionFieldId], values: [[name]]
+            });
+          }
+        });
         if (showLabels) {
           var c = lyr.getBounds().getCenter();
           var OFF = { 'London': [0.55, 0.55], 'South East': [-0.30, 0.10] };

@@ -128,6 +128,32 @@ change it in both places so they stay in sync:
   left-hand number the smallest. If they do not, confirm both charts use the same
   metric and the same data source.
 
+## Part 8: using the map as a filter
+
+The map sends a filter on the Region field when you click a region, so it can
+cross-filter other charts. In View mode, click a region to filter, click it again
+to clear. The clicked region stays highlighted with a dark border; the others dim.
+
+What it can filter: any chart whose data source has a matching Region field.
+
+- Same data source as the map (region_summary): the regional bar chart, the H1
+  greenspace scatter, the H2 building-density scatter, and the scorecards built on
+  region_summary all respond. Click West Midlands and they show West Midlands only.
+- Monthly time series (looker_monthly_mortality, which has a Region column): it can
+  be filtered to the clicked region too, showing that region's monthly deaths and
+  temperature. This works when its Region field name matches the map's.
+
+What it should not filter, because these have no region dimension:
+
+- The Moran's I by year chart and the DLNM exposure-response curve are national or
+  temporal, so a region click cannot narrow them. Leave them unlinked.
+
+Keeping the legend on the full scale: because cross-filtering applies to every chart
+on the same data source, selecting one region would collapse the legend to a single
+value. To keep the legend showing the whole low-to-high range, add the Google Sheet
+tab a second time as a separate data source and point the legend at that copy, so the
+map's filter does not reach it.
+
 ## While developing, and rebuilding
 
 The manifest has `"devMode": true`, so Looker does not cache the files and your
