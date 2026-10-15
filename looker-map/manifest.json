@@ -9,9 +9,9 @@
       "name": "Heatwave Bubble Map",
       "description": "Bubbles sized and coloured by one metric, on an OpenStreetMap base.",
       "resource": {
-        "js": "heatmap-bubble.js",
-        "config": "heatmap-bubble.json",
-        "css": "heatmap-bubble.css"
+        "js": "gs://gtsikudo-heatwave-viz/heatmap-bubble.js",
+        "config": "gs://gtsikudo-heatwave-viz/heatmap-bubble.json",
+        "css": "gs://gtsikudo-heatwave-viz/heatmap-bubble.css"
       }
     },
     {
@@ -19,9 +19,9 @@
       "name": "Heatwave Legend",
       "description": "White to cyan to red gradient legend that matches the bubble map scale.",
       "resource": {
-        "js": "heatmap-legend.js",
-        "config": "heatmap-legend.json",
-        "css": "heatmap-legend.css"
+        "js": "gs://gtsikudo-heatwave-viz/heatmap-legend.js",
+        "config": "gs://gtsikudo-heatwave-viz/heatmap-legend.json",
+        "css": "gs://gtsikudo-heatwave-viz/heatmap-legend.css"
       }
     }
   ]
