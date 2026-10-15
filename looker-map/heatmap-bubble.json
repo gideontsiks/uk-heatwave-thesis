@@ -1,12 +1,10 @@
 {
   "data": [
     {
-      "id": "location",
-      "label": "Location",
+      "id": "regionSection",
+      "label": "Region",
       "elements": [
-        { "id": "lat",   "label": "Latitude",         "type": "DIMENSION", "options": { "min": 1, "max": 1 } },
-        { "id": "lon",   "label": "Longitude",        "type": "DIMENSION", "options": { "min": 1, "max": 1 } },
-        { "id": "label", "label": "Label (optional)", "type": "DIMENSION", "options": { "min": 0, "max": 1 } }
+        { "id": "region", "label": "Region name", "type": "DIMENSION", "options": { "min": 1, "max": 1 } }
       ]
     },
     {
@@ -19,6 +17,13 @@
   ],
   "style": [
     {
+      "id": "titleGroup",
+      "label": "Title",
+      "elements": [
+        { "id": "title", "label": "Map title", "type": "TEXTINPUT", "defaultValue": "Pooled excess heat-mortality by region" }
+      ]
+    },
+    {
       "id": "colors",
       "label": "Colour scale",
       "elements": [
@@ -28,12 +33,12 @@
       ]
     },
     {
-      "id": "bubbles",
-      "label": "Bubbles",
+      "id": "regionsStyle",
+      "label": "Regions",
       "elements": [
-        { "id": "maxRadius",   "label": "Max radius (px)", "type": "TEXTINPUT", "defaultValue": "28" },
-        { "id": "fillOpacity", "label": "Fill opacity",    "type": "OPACITY",   "defaultValue": "0.85" },
-        { "id": "showLabels",  "label": "Show labels",     "type": "CHECKBOX",  "defaultValue": true }
+        { "id": "fillOpacity", "label": "Fill opacity", "type": "OPACITY",  "defaultValue": "0.92" },
+        { "id": "showLabels",  "label": "Show labels",  "type": "CHECKBOX", "defaultValue": true },
+        { "id": "decimals",    "label": "Decimals",     "type": "TEXTINPUT", "defaultValue": "1" }
       ]
     }
   ]

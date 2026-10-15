@@ -1,10 +1,11 @@
-# Heatwave Bubble Map and Legend: custom Looker Studio community visualizations
+# Heatwave Region Map and Legend: custom Looker Studio community visualizations
 
 This folder holds two custom charts for Looker Studio that work together:
 
-- Heatwave Bubble Map: one bubble per region, placed by Latitude and Longitude,
-  sized and coloured by a metric on a white to cyan to red scale, on an
-  OpenStreetMap base. No Google Maps API key is needed.
+- Heatwave Region Map: England and Wales NUTS1 regions drawn as a choropleth,
+  each region shaded by a metric on a white to cyan to red scale, with region
+  labels and a title. The region boundaries are embedded in the chart, so it
+  needs no base-map tiles and no API key, and it always renders.
 - Heatwave Legend: a horizontal white to cyan to red gradient bar that labels the
   low, middle, and high values of the same metric, so the map can be read at a
   glance.
@@ -61,23 +62,22 @@ file name on the end.
 2. On the toolbar click "Community visualizations and components", then "Explore more".
 3. Click "Build your own visualization" at the top.
 4. In "Manifest path" paste your bucket path exactly: `gs://gtsikudo-heatwave-viz`
-5. Click Submit. Two cards appear: Heatwave Bubble Map and Heatwave Legend. Click
+5. Click Submit. Two cards appear: Heatwave Region Map and Heatwave Legend. Click
    the map first to drop it on the canvas; you will add the legend in Part 4.
 
 ## Part 3: connect the map fields
 
 Select the map, open the Setup tab, set the data source to `region_summary`, then:
 
-- Latitude goes to the Latitude field.
-- Longitude goes to the Longitude field.
-- Label (optional) goes to Region.
+- Region name goes to the Region field.
 - Metric goes to ExcessPer100k.
 
-Latitude and Longitude are numbers, so Looker may first place them under metrics.
-Each must sit in its slot as a dimension. If a field lands as a metric, remove it,
-then add it again and choose to use it as a dimension. The reliable way: in the
-data source, duplicate the Latitude and Longitude fields, set each copy's
-aggregation to None, and use those copies here.
+That is all the map needs. It matches each row's Region name to the embedded
+boundary of that region and shades it. The region names in your data must match
+these exactly: North East, North West, Yorkshire and The Humber, East Midlands,
+West Midlands, East of England, London, South East, South West, Wales. If one is
+spelled differently in your sheet, that region will draw in grey as "no data", so
+fix the spelling in the sheet to match.
 
 ## Part 4: add and connect the legend
 
@@ -114,16 +114,16 @@ change it in both places so they stay in sync:
 1. Select the map, open Style, and set Low to white, Mid to cyan (#0E7C8B), High to
    red (#C0392B). These are the defaults.
 2. Select the legend, open Style, and set the same three colours.
-3. On the map Style tab you can also set the maximum bubble radius, the fill
-   opacity, and whether region labels show. On the legend Style tab you can set the
-   title text and the number of decimals.
+3. On the map Style tab you can also set the map title, the fill opacity, whether
+   region labels show, and the number of decimals. On the legend Style tab you can
+   set the title text and the number of decimals.
 
 ## Part 7: final checks
 
-- Click View, top right, to see the clean report. The biggest, reddest bubbles
-  should sit over the Midlands and South East, with London small and pale.
-- Hover a bubble: a popup shows the region and its value. The permanent labels name
-  each region on the map.
+- Click View, top right, to see the clean report. The reddest regions should be the
+  Midlands and South East, with the North East near white, matching the thesis.
+- Hover or click a region: a popup shows the region and its value. The labels on each
+  region show its name and value.
 - The legend's right-hand number should equal the largest regional value, and the
   left-hand number the smallest. If they do not, confirm both charts use the same
   metric and the same data source.
@@ -144,12 +144,12 @@ cd ~/Code/heatwave-map-viz && bash build.sh && gsutil cp heatmap-bubble.js heatm
 - Chart will not load: the files are probably not public. Re-run the
   `gsutil iam ch allUsers:objectViewer` line, and check the manifest path ends at
   the bucket with no file name.
-- Bubbles missing but the map shows: confirm Latitude and Longitude are dimensions
-  holding real numbers, and that the metric is set.
+- A region draws grey as "no data": its name in your sheet does not match the
+  boundary name. Fix the spelling to one of the ten listed in Part 3.
+- Nothing shades at all: confirm Region is in the Region slot and the metric is set,
+  and that the data source is region_summary.
 - Legend numbers look wrong: it must use the same metric and data source as the map,
   with Region as its dimension.
-- Base map tiles missing: the viewer's network may block OpenStreetMap. Bubbles
-  still render on the grey background, which is fine for a defence.
 - An error mentions dscId: that only happens when the files are opened outside
   Looker. Inside a report it does not occur.
 

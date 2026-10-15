@@ -1,13 +1,13 @@
 {
-  "name": "Heatwave Bubble Map",
+  "name": "Heatwave Region Map",
   "organization": "Gideon Kwesi Tsikudo",
-  "description": "Custom latitude and longitude bubble map with a white to cyan to red metric scale.",
+  "description": "England and Wales region choropleth with a white to cyan to red metric scale, plus a matching legend.",
   "devMode": true,
   "components": [
     {
       "id": "heatmapBubble",
-      "name": "Heatwave Bubble Map",
-      "description": "Bubbles sized and coloured by one metric, on an OpenStreetMap base.",
+      "name": "Heatwave Region Map",
+      "description": "England and Wales regions shaded by one metric, with labels and a title. Boundaries are embedded, so no base-map tiles are needed.",
       "resource": {
         "js": "gs://gtsikudo-heatwave-viz/heatmap-bubble.js",
         "config": "gs://gtsikudo-heatwave-viz/heatmap-bubble.json",
@@ -17,7 +17,7 @@
     {
       "id": "heatmapLegend",
       "name": "Heatwave Legend",
-      "description": "White to cyan to red gradient legend that matches the bubble map scale.",
+      "description": "White to cyan to red gradient legend that matches the region map scale.",
       "resource": {
         "js": "gs://gtsikudo-heatwave-viz/heatmap-legend.js",
         "config": "gs://gtsikudo-heatwave-viz/heatmap-legend.json",
