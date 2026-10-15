@@ -1,0 +1,10 @@
+# Intermediate build inputs (build.sh re-fetches these)
+node_modules/
+package.json
+package-lock.json
+dscc.min.js
+leaflet.js
+leaflet.css
+
+# Mac clutter
+.DS_Store

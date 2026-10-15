@@ -1,0 +1,14 @@
+html, body { margin: 0; padding: 0; }
+#map { width: 100%; height: 100%; }
+.leaflet-container {
+  background: #F4F8F9;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+}
+.bub-label {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  color: #14252A;
+  font-weight: 600;
+  font-size: 10px;
+}

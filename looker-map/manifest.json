@@ -1,0 +1,28 @@
+{
+  "name": "Heatwave Bubble Map",
+  "organization": "Gideon Kwesi Tsikudo",
+  "description": "Custom latitude and longitude bubble map with a white to cyan to red metric scale.",
+  "devMode": true,
+  "components": [
+    {
+      "id": "heatmapBubble",
+      "name": "Heatwave Bubble Map",
+      "description": "Bubbles sized and coloured by one metric, on an OpenStreetMap base.",
+      "resource": {
+        "js": "heatmap-bubble.js",
+        "config": "heatmap-bubble.json",
+        "css": "heatmap-bubble.css"
+      }
+    },
+    {
+      "id": "heatmapLegend",
+      "name": "Heatwave Legend",
+      "description": "White to cyan to red gradient legend that matches the bubble map scale.",
+      "resource": {
+        "js": "heatmap-legend.js",
+        "config": "heatmap-legend.json",
+        "css": "heatmap-legend.css"
+      }
+    }
+  ]
+}

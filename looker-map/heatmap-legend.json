@@ -1,0 +1,37 @@
+{
+  "data": [
+    {
+      "id": "breakdownSection",
+      "label": "Break down by",
+      "elements": [
+        { "id": "breakdown", "label": "Dimension", "type": "DIMENSION", "options": { "min": 1, "max": 1 } }
+      ]
+    },
+    {
+      "id": "metricSection",
+      "label": "Metric",
+      "elements": [
+        { "id": "metric", "label": "Metric", "type": "METRIC", "options": { "min": 1, "max": 1 } }
+      ]
+    }
+  ],
+  "style": [
+    {
+      "id": "colors",
+      "label": "Colour scale",
+      "elements": [
+        { "id": "minColor", "label": "Low",  "type": "FILL_COLOR", "defaultValue": "#FFFFFF" },
+        { "id": "midColor", "label": "Mid",  "type": "FILL_COLOR", "defaultValue": "#0E7C8B" },
+        { "id": "maxColor", "label": "High", "type": "FILL_COLOR", "defaultValue": "#C0392B" }
+      ]
+    },
+    {
+      "id": "labels",
+      "label": "Labels",
+      "elements": [
+        { "id": "title",    "label": "Title",    "type": "TEXTINPUT", "defaultValue": "Excess per 100k" },
+        { "id": "decimals", "label": "Decimals", "type": "TEXTINPUT", "defaultValue": "1" }
+      ]
+    }
+  ]
+}
